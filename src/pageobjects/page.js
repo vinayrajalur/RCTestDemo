@@ -10,4 +10,8 @@ module.exports = class Page {
     open () {
         return browser.url(`https://www.saucedemo.com/`)
     }
+    
+    async pause(ms) {
+      await browser.pause(ms);
+    }
 }

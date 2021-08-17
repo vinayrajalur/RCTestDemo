@@ -27,11 +27,7 @@ class InventoryPage extends Page {
       return $(this.invertoryList[itemName]);
     }
 
-    get shoppingCartLink () { return $('[class="shopping_cart_link"]')}
-
-    async pause(ms) {
-      await browser.pause(ms);
-    }
+    get shoppingCartLink () { return $('[class="shopping_cart_link"]') }
 }
 
 module.exports = new InventoryPage();
