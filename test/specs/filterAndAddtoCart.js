@@ -1,6 +1,6 @@
-const LoginPage = require('../pageobjects/login.page');
-const InventoryPage = require('../pageobjects/inventory.page');
-const CartPage = require('../pageobjects/cart.page');
+const LoginPage = require('../../src/pageobjects/login.page');
+const InventoryPage = require('../../src/pageobjects/inventory.page');
+const CartPage = require('../../src/pageobjects/cart.page');
 
 var assrt = require('expect.js');
 
