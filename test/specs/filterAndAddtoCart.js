@@ -20,19 +20,30 @@ describe('RCTestDemoApp', () => {
 
     it('Add given items to cart and verify', async () => {
         console.log("Adding Fleece Jacket to cart");
-        let addItemLink1 = await InventoryPage.addItemToCart("Sauce Labs Fleece Jacket");
-        await addItemLink1.click();
-        let addItemLink2 = await InventoryPage.addItemToCart("Sauce Labs Backpack");
-        await addItemLink2.click();
+        let prodList = ["Sauce Labs Fleece Jacket", "Sauce Labs Backpack"]
+        const prodObjList = await Promise.all(
+          prodList.map(async item => await InventoryPage.addItemToCart(item))
+        );
+
+        await Promise.all(
+          prodObjList.map(async obj => await obj.click())
+        );
+        
         await InventoryPage.pause(2000);
         await InventoryPage.shoppingCartLink.click();
         await InventoryPage.pause(2000);
 
         let itemList = await CartPage.cartInventoryList;
+
+        const cartListObj = [];
         const cartListNames = [];
-        for(let i=0; i<itemList.length; i++){
-          cartListNames.push(await itemList[i].getText());
-        }
-        assrt(["Sauce Labs Fleece Jacket", "Sauce Labs Backpack"]).to.eql(cartListNames);
+
+        itemList.forEach( item => cartListObj.push(item))
+
+        await Promise.all(
+          cartListObj.map(async obj => cartListNames.push(await obj.getText()))
+        );
+
+        assrt(prodList).to.eql(cartListNames);
     });
 });
